@@ -93,10 +93,11 @@ button:focus-visible {
   font-size: 1.2rem;
   font-weight: bold;
   color: #333; /* Replace with your theme color if needed */
+  text-align: center;
 }
 
-.description {
-  color: #666; /* Replace with your theme color if needed */
+.bold {
+  font-weight: bold;
 }
 
 
