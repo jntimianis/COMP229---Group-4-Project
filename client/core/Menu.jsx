@@ -25,11 +25,9 @@ export default function Menu(){
           style={isActive(location, "/")}>Home
         </Button>
       </Link>
-      <Link>
-        <Button
-          style={isActive(location, "/addconcerts")}>Add Concerts
-        </Button>
-      </Link>
+      <Link to="/addconcerts">
+    <Button style={isActive(location, "/addconcerts")}>Add Concerts</Button>
+</Link>
       {
         !auth.isAuthenticated() && (<span>
           <Link to="/signup">

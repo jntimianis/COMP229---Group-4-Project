@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from './core/Home'
+import AddConcerts from './core/AddConcerts.jsx'
 import Users from './user/Users.jsx'
 import Signup from './user/Signup.jsx'
 import Signin from './lib/Signin.jsx'
@@ -17,7 +18,7 @@ function MainRouter() {
 
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/addconcerts" element={<Users />} />
+                <Route path="/addconcerts" element={<AddConcerts />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/signin" element={<Signin />} />
                 <Route

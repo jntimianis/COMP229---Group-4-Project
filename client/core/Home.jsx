@@ -9,6 +9,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { useNavigate } from 'react-router-dom';
 
 // Sample concert data
 const concerts = [
@@ -61,6 +62,7 @@ const concerts = [
 ];
 
 export default function Home() {
+    const navigate = useNavigate(); 
     return (
         <div>
             <Card className="card">
@@ -74,7 +76,7 @@ export default function Home() {
             {/* Add Concert Button */}
             <button
                 className="add-button"
-                onClick={() => console.log("Add New Concert clicked")}
+                onClick={() => navigate("/addconcerts")} // Navigate to the form
             >
                 + Add New Concert
             </button>
