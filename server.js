@@ -31,7 +31,7 @@ const createData = async (req, res) => {
     //hashed_password: "dsdsd",
    // salt: "dd"
   })
-
+  console.log(data)
  res.redirect("/")
 }
 
