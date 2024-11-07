@@ -100,6 +100,46 @@ button:focus-visible {
   font-weight: bold;
 }
 
+/* Container for buttons at the bottom of the card */
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* Style for Edit button */
+.edit-button {
+  background-color: #4caf50; /* Green for edit */
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+/* Style for Delete button */
+.delete-button {
+  background-color: #f44336; /* Red for delete */
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
 
 
 @media (prefers-color-scheme: light) {
