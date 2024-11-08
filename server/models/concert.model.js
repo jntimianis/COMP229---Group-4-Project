@@ -25,7 +25,6 @@ const ConcertSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
-    required: "User is required",
   },
 });
 
