@@ -2,86 +2,36 @@ import config from "./config/config.js";
 import app from "./server/express.js";
 import mongoose from "mongoose";
 import database from "./server/models/user.model.js";
+import cors from 'cors';
 
-app.set("view engine", "ejs");
-/*
-mongoose.Promise = global.Promise;
+// CORS configuration
 
-const findData = async (req, res) => {
-  const data = await database.find();
-  res.send({ data });
+const corsOptions = {
+  origin: 'http://localhost:5173', // Allow your frontend's URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Include OPTIONS for preflight requests
+  allowedHeaders: ['Content-Type', 'Authorization'], // Include headers you use
+  credentials: true, // Allow credentials (cookies, authorization headers)
+  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
 };
 
-const createData = async (req, res) => {
-  const data = await database.create({
-    concertName: req.body.concertName,
-    concertPicture: req.body.concertPicture,
-    concertPost: req.body.concertPost,
-    customerName: req.body.customerName,
-    userName: req.body.userName,
-    password: req.body.password,
-    customerEmail: req.body.customerEmail,
+app.use(cors(corsOptions));
 
-    //hashed_password: "dsdsd",
-    // salt: "dd"
-  });
-  console.log(data);
-  res.redirect("/");
-};
+// Handle preflight requests for all routes
+app.options('*', cors());  // Explicitly handle OPTIONS requests
 
-const deletePost = async (req, res) => {
-  const deletedData = await database.deleteOne({
-    _id: "672b7be0de5a6d030800b639",
-  });
-  console.log(deletedData);
-  res.redirect("/");
-};
-
-const updateData = async (req, res) => {
-  const { id } = req.params;
-  const updateData = await database.findByIdAndUpdate({ _id: id }, req.body);
-  res.send(updateData);
-};
-//route
-app.get("/login", async (req, res) => {
-  res.render("miniAppLogin");
-});
-
-app.post("/login", async (req, res) => {
-  res.redirect("login");
-});
-
-app.get("/", findData);
-app.get("/create", createData);
-app.get("/delete", deletePost);
-app.post("/update/:id", updateData);
-
-mongoose
-  .connect(config.mongoUri, {
-    //useNewUrlParser: true,
-    //useCreateIndex: true,
-    //useUnifiedTopology: true
-  })
-  .then(() => {
-    console.log("Connected to the database!");
-  });
-
-mongoose.connection.on("error", () => {
-  throw new Error(`unable to connect to database: ${config.mongoUri}`);
-});
-
-app.listen(config.port, (err) => {
-  if (err) {
-    console.log(err);
+// Example API route
+app.get('/api/concerts', async (req, res) => {
+  try {
+    const concerts = await database.find();
+    res.json(concerts);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch concerts' });
   }
-  console.info("Server started on port %s.", config.port);
 });
-*/
-mongoose.Promise = global.Promise;
 
+// Database connection
 mongoose.connect(config.mongoUri, {
-  //useNewUrlParser: true,
-  //useUnifiedTopology: true
+  // Optional options
 }).then(() => {
   console.log("Connected to the database!");
 }).catch((err) => {
@@ -89,7 +39,7 @@ mongoose.connect(config.mongoUri, {
   process.exit(1);
 });
 
-
+// Start the server
 app.listen(config.port, (err) => {
   if (err) {
     console.log(err);
