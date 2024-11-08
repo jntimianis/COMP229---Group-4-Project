@@ -17,7 +17,7 @@ const create = async (req, res) => {
 
 const list = async (req, res) => {
   try {
-    let concerts = await Concert.find().select("name email updated created");
+    let concerts = await Concert.find().select("name date venue location description");
     res.json(concerts);
   } catch (err) {
     return res.status(400).json({
@@ -30,13 +30,13 @@ const concertByID = async (req, res, next, id) => {
   try {
     let concert = await Concert.findById(id);
     if (!concert)
-      return res.status("400").json({
+      return res.status(400).json({
         error: "Concert not found",
       });
     req.profile = concert;
     next();
   } catch (err) {
-    return res.status("400").json({
+    return res.status(400).json({
       error: "Could not retrieve concert",
     });
   }

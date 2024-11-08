@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import database from "./server/models/user.model.js";
 
 app.set("view engine", "ejs");
-
+/*
 mongoose.Promise = global.Promise;
 
 const findData = async (req, res) => {
@@ -73,6 +73,27 @@ mongoose.connection.on("error", () => {
 app.listen(config.port, (err) => {
   if (err) {
     console.log(err);
+  }
+  console.info("Server started on port %s.", config.port);
+});
+*/
+mongoose.Promise = global.Promise;
+
+mongoose.connect(config.mongoUri, {
+  //useNewUrlParser: true,
+  //useUnifiedTopology: true
+}).then(() => {
+  console.log("Connected to the database!");
+}).catch((err) => {
+  console.error('Unable to connect to the database:', err);
+  process.exit(1);
+});
+
+
+app.listen(config.port, (err) => {
+  if (err) {
+    console.log(err);
+    return;
   }
   console.info("Server started on port %s.", config.port);
 });

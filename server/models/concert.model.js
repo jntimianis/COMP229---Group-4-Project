@@ -7,8 +7,8 @@ const ConcertSchema = new mongoose.Schema({
     required: "Name is required",
   },
   date: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    trim: true,
   },
   venue: {
     type: String,
@@ -21,6 +21,11 @@ const ConcertSchema = new mongoose.Schema({
   description: {
     type: String,
     trim: true,
+  },
+  owner: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+    required: "User is required",
   },
 });
 
