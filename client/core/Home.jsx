@@ -102,6 +102,11 @@ export default function Home() {
                             <span className="bold">Description: </span> {concert.description}
                         </Typography>
                     </CardContent>
+                    {/* Button container */}
+                    <div className="button-container">
+                        <button className="edit-button" onClick={() => console.log(`Edit concert ${concert.id}`)}>Edit</button>
+                        <button className="delete-button" onClick={() => console.log(`Delete concert ${concert.id}`)}>Delete</button>
+                    </div>
                 </Card>
             ))}
         </div>
