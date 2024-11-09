@@ -53,6 +53,8 @@ const requireSignin = expressjwt({
         }
 
         const hasConcertAuthorization = (req, res, next) => { 
+            console.log("req.auth:", req.auth); // Should contain authenticated user's ID
+            console.log("req.profile:", req.profile); // Should contain the concert with the owner ID
             const authorized = req.profile && req.auth
             && req.profile.owner == req.auth._id; 
             if (!(authorized)) {
