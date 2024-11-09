@@ -13,6 +13,8 @@ router.route('/api/concerts/:concertId')
   .put(authCtrl.requireSignin, concertCtrl.update)
   .delete(authCtrl.requireSignin, concertCtrl.remove);
 
-router.param('concertId', concertCtrl.concertByID);
+router.route('/api/concerts/:concertId/rating')
+  .put(authCtrl.requireSignin, concertCtrl.updateRating);
+  router.param('concertId', concertCtrl.concertByID);
 
 export default router;
