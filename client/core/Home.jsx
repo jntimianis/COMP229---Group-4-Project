@@ -5,15 +5,17 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
     const [concerts, setConcerts] = useState([]);
+    const [selectedConcert, setSelectedConcert] = useState(null); // For storing the concert to edit
+    const [openModal, setOpenModal] = useState(false); // For controlling modal visibility
     const navigate = useNavigate();
 
     // Fetch concerts from the backend
     useEffect(() => {
+        const token = sessionStorage.getItem('jwt') ? JSON.parse(sessionStorage.getItem('jwt')).token : null;
+        console.log("JWT Get Token:", token); // Log the token for debugging
         const fetchConcerts = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/api/concerts', {
@@ -30,21 +32,6 @@ export default function Home() {
         
         fetchConcerts();
     }, []);
-
-        const handleDeleteConcert = async (concertId) => {
-            try{
-                await axios.delete(`http://localhost:3000/api/concerts/${concertId}`, {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
-                    }
-                });
-                setConcerts(concerts.filter(concert => concert._id !== concertId));
-                toast.error("Concert deleted.");
-            } catch (error) {
-                console.error("Error deleting concert:", error);
-                toast.error("Failed to delete concert");
-            }
-        };
 
     return (
         <div>
@@ -85,15 +72,83 @@ export default function Home() {
                             <Typography variant="body2" className="description">
                                 <span className="bold">Description: </span> {concert.description}
                             </Typography>
-                        </CardContent>
+                            <Rating name={`rating-${concert._id}`} value={concert.rating || 0}
+                                      onChange={(event, newValue) => handleRatingChange(newValue)} />
+                            </CardContent>
                         {/* Button container */}
                         <div className="button-container">
                             <button className="edit-button" onClick={() => console.log(`Edit concert ${concert._id}`)}>Edit</button>
-                            <button className="delete-button" onClick={() => handleDeleteConcert(concert._id)}>Delete</button>
+                            <button className="delete-button" onClick={() => console.log(`Delete concert ${concert._id}`)}>Delete</button>
                         </div>
                     </Card>
                 ))}
             </div>
+            {/* Edit Concert Modal */}
+            <Dialog open={openModal} onClose={() => setOpenModal(false)} maxWidth="sm" fullWidth>
+    <DialogTitle>Edit Concert</DialogTitle>
+    <DialogContent>
+        <TextField
+            label="Name"
+            name="name"
+            value={selectedConcert?.name || ''}
+            onChange={handleChange}
+            fullWidth
+            margin="dense"
+            variant="outlined"
+        />
+        <TextField
+            label="Date"
+            name="date"
+            value={selectedConcert?.date || ''}
+            onChange={handleChange}
+            fullWidth
+            margin="dense"
+            variant="outlined"
+        />
+        <TextField
+            label="Venue"
+            name="venue"
+            value={selectedConcert?.venue || ''}
+            onChange={handleChange}
+            fullWidth
+            margin="dense"
+            variant="outlined"
+        />
+        <TextField
+            label="Location"
+            name="location"
+            value={selectedConcert?.location || ''}
+            onChange={handleChange}
+            fullWidth
+            margin="dense"
+            variant="outlined"
+        />
+        <TextField
+            label="Description"
+            name="description"
+            value={selectedConcert?.description || ''}
+            onChange={handleChange}
+            fullWidth
+            margin="dense"
+            variant="outlined"
+            multiline
+            rows={4}
+        />
+        <Rating
+        name="rating"
+        value={selectedConcert?.rating || 0}
+        onChange={(e, newValue) => handleRatingChange(newValue)}
+        />
+    </DialogContent>
+    <DialogActions>
+        <Button onClick={() => setOpenModal(false)} color="secondary">
+            Cancel
+        </Button>
+        <Button onClick={handleUpdateConcert} color="primary" variant="contained">
+            Save
+        </Button>
+    </DialogActions>
+</Dialog>
         </div>
     );
 }

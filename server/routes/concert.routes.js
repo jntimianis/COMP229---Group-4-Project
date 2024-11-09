@@ -10,9 +10,11 @@ router.route('/api/concerts').get(concertCtrl.list);
 
 router.route('/api/concerts/:concertId')
   .get(authCtrl.requireSignin, concertCtrl.read)
-  .put(authCtrl.requireSignin, authCtrl.hasConcertAuthorization, concertCtrl.update)
-  .delete(authCtrl.requireSignin, authCtrl.hasConcertAuthorization, concertCtrl.remove);
+  .put(authCtrl.requireSignin, concertCtrl.update)
+  .delete(authCtrl.requireSignin, concertCtrl.remove);
 
-router.param('concertId', concertCtrl.concertByID);
+router.route('/api/concerts/:concertId/rating')
+  .put(authCtrl.requireSignin, concertCtrl.updateRating);
+  router.param('concertId', concertCtrl.concertByID);
 
 export default router;

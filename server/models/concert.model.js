@@ -22,6 +22,12 @@ const ConcertSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  rating: {
+    type: Number,
+    min: 0,
+    max: 5,
+    default: 0, // Default rating
+  },
   owner: {
     type: mongoose.Schema.ObjectId,
     ref: "User",

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Card, Typography, TextField, Button } from '@material-ui/core';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 export default function AddConcerts() {
     const [concertData, setConcertData] = useState({
@@ -9,13 +7,18 @@ export default function AddConcerts() {
         date: '',
         venue: '',
         location: '',
-        description: ''
+        description: '',
+        rating: 0
     });
-    const [feedback, setFeedback] = useState('');
+    const [feedback, setFeedback] = useState('');    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setConcertData({ ...concertData, [name]: value });
+    };
+
+    const handleRatingChange = (event, newValue) => {
+        setConcertData({ ...concertData, rating: newValue });
     };
 
     const handleSubmit = async (e) => {
@@ -27,9 +30,8 @@ export default function AddConcerts() {
                 body: JSON.stringify(concertData)
             });
             if (response.ok) {
-                toast.success('Concert added successfully!');
+                setFeedback('Concert added successfully!');
                 setConcertData({ name: '', date: '', venue: '', location: '', description: '' });
-                setFeedback('');
             } else {
                 toast.error('Failed to add concert')
             }
@@ -85,6 +87,11 @@ export default function AddConcerts() {
                     margin="normal"
                     multiline
                     rows={4}
+                />
+                <Rating
+                    name="rating"
+                    value={concertData.rating}
+                    onChange={handleRatingChange}
                 />
                 <Button type="submit" color="primary" variant="contained">
                     Add Concert
