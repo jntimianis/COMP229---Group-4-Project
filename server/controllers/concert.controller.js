@@ -17,7 +17,7 @@ const create = async (req, res) => {
 
 const list = async (req, res) => {
   try {
-    let concerts = await Concert.find().select("name date venue location description");
+    let concerts = await Concert.find().select("name date venue location description rating");
     res.json(concerts);
   } catch (err) {
     return res.status(400).json({
@@ -72,4 +72,17 @@ const remove = async (req, res) => {
   }
 };
 
-export default { create, concertByID, read, list, remove, update };
+const updateRating = async (req, res) => {
+  try {
+    let concert = await Concert.findById(req.params.concertId);
+    if (!concert) return res.status(400).json({ error: "Concert not found" });
+
+    concert.rating = req.body.rating; // Set the new rating
+    await concert.save();
+    res.json(concert);
+  } catch (err) {
+    return res.status(400).json({ error: errorHandler.getErrorMessage(err) });
+  }
+};
+
+export default { create, concertByID, read, list, remove, update , updateRating };
