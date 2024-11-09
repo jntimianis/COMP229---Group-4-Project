@@ -5,6 +5,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
     const [concerts, setConcerts] = useState([]);
@@ -28,6 +30,21 @@ export default function Home() {
         
         fetchConcerts();
     }, []);
+
+        const handleDeleteConcert = async (concertId) => {
+            try{
+                await axios.delete(`http://localhost:3000/api/concerts/${concertId}`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+                    }
+                });
+                setConcerts(concerts.filter(concert => concert._id !== concertId));
+                toast.error("Concert deleted.");
+            } catch (error) {
+                console.error("Error deleting concert:", error);
+                toast.error("Failed to delete concert");
+            }
+        };
 
     return (
         <div>
@@ -72,7 +89,7 @@ export default function Home() {
                         {/* Button container */}
                         <div className="button-container">
                             <button className="edit-button" onClick={() => console.log(`Edit concert ${concert._id}`)}>Edit</button>
-                            <button className="delete-button" onClick={() => console.log(`Delete concert ${concert._id}`)}>Delete</button>
+                            <button className="delete-button" onClick={() => handleDeleteConcert(concert._id)}>Delete</button>
                         </div>
                     </Card>
                 ))}

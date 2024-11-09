@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Typography, TextField, Button } from '@material-ui/core';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function AddConcerts() {
     const [concertData, setConcertData] = useState({
@@ -25,13 +27,14 @@ export default function AddConcerts() {
                 body: JSON.stringify(concertData)
             });
             if (response.ok) {
-                setFeedback('Concert added successfully!');
+                toast.success('Concert added successfully!');
                 setConcertData({ name: '', date: '', venue: '', location: '', description: '' });
+                setFeedback('');
             } else {
-                setFeedback('Failed to add concert');
+                toast.error('Failed to add concert')
             }
         } catch (error) {
-            setFeedback('Failed to add concert');
+            toast.error('Failed to add concert')
         }
     };
 
