@@ -5,7 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { useNavigate } from 'react-router-dom';
-import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, Rating } from '@mui/material';
 
 export default function Home() {
     const [concerts, setConcerts] = useState([]);
@@ -71,6 +71,11 @@ export default function Home() {
         console.log("Updated selectedConcert:", selectedConcert); // Debugging statement
     };
 
+    // Handle Rating Change
+    const handleRatingChange = (newRating) => {
+        setSelectedConcert(prevConcert => ({ ...prevConcert, rating: newRating }));
+    };
+
     return (
         <div>
             <Card className="card">
@@ -110,7 +115,9 @@ export default function Home() {
                             <Typography variant="body2" className="description">
                                 <span className="bold">Description: </span> {concert.description}
                             </Typography>
-                        </CardContent>
+                            <Rating name={`rating-${concert._id}`} value={concert.rating || 0}
+                                      onChange={(event, newValue) => handleRatingChange(newValue)} />
+                            </CardContent>
                         {/* Button container */}
                         <div className="button-container">
                             <button className="edit-button" onClick={() => handleEditClick(concert)}>Edit</button>
@@ -169,6 +176,11 @@ export default function Home() {
             variant="outlined"
             multiline
             rows={4}
+        />
+        <Rating
+        name="rating"
+        value={selectedConcert?.rating || 0}
+        onChange={(e, newValue) => handleRatingChange(newValue)}
         />
     </DialogContent>
     <DialogActions>
