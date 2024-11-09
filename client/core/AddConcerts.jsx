@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Typography, TextField, Button } from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
 
 export default function AddConcerts() {
     const [concertData, setConcertData] = useState({
@@ -7,13 +8,18 @@ export default function AddConcerts() {
         date: '',
         venue: '',
         location: '',
-        description: ''
+        description: '',
+        rating: 0
     });
-    const [feedback, setFeedback] = useState('');
+    const [feedback, setFeedback] = useState('');    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setConcertData({ ...concertData, [name]: value });
+    };
+
+    const handleRatingChange = (event, newValue) => {
+        setConcertData({ ...concertData, rating: newValue });
     };
 
     const handleSubmit = async (e) => {
@@ -26,7 +32,7 @@ export default function AddConcerts() {
             });
             if (response.ok) {
                 setFeedback('Concert added successfully!');
-                setConcertData({ name: '', date: '', venue: '', location: '', description: '' });
+                setConcertData({ name: '', date: '', venue: '', location: '', description: '' , rating: 0});
             } else {
                 setFeedback('Failed to add concert');
             }
@@ -82,6 +88,11 @@ export default function AddConcerts() {
                     margin="normal"
                     multiline
                     rows={4}
+                />
+                <Rating
+                    name="rating"
+                    value={concertData.rating}
+                    onChange={handleRatingChange}
                 />
                 <Button type="submit" color="primary" variant="contained">
                     Add Concert
