@@ -33,10 +33,10 @@ export default function AddConcerts() {
                 setFeedback('Concert added successfully!');
                 setConcertData({ name: '', date: '', venue: '', location: '', description: '' });
             } else {
-                toast.error('Failed to add concert')
+                setFeedback('Failed to add concert');
             }
         } catch (error) {
-            toast.error('Failed to add concert')
+            setFeedback('Failed to add concert');
         }
     };
 
