@@ -38,6 +38,7 @@ export default function AddConcerts() {
           venue: "",
           location: "",
           description: "",
+          rating: 0
         });
       } else {
         toast.error("Failed to add concert");

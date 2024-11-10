@@ -136,6 +136,9 @@ export default function Home() {
     setOpenEditModal(false);
     setSelectedConcert(null);
   };
+  const handleRatingChange = (event, newValue) => {
+    setSelectedConcert((prevConcert) => ({ ...prevConcert, rating: newValue }));
+};
 
   return (
     <div>
@@ -159,7 +162,7 @@ export default function Home() {
               <Typography variant="body2" className="venue"><span className="bold">Venue: </span> {concert.venue}</Typography>
               <Typography variant="body2" className="location"><span className="bold">Location:</span> {concert.location}</Typography>
               <Typography variant="body2" className="description"><span className="bold">Description: </span> {concert.description}</Typography>
-              <Rating name={`rating-${concert._id}`} value={concert.rating || 0} onChange={(event, newValue) => handleRatingChange(newValue)} />
+              <Rating name={`rating-${concert._id}`} value={concert.rating || 0} readOnly />
             </CardContent>
             <div className="button-container">
               <button className="edit-button" onClick={() => handleEditClick(concert)}>Edit</button>
@@ -190,7 +193,7 @@ export default function Home() {
           <TextField label="Venue" name="venue" value={selectedConcert?.venue || ""} onChange={handleChange} fullWidth margin="dense" variant="outlined" />
           <TextField label="Location" name="location" value={selectedConcert?.location || ""} onChange={handleChange} fullWidth margin="dense" variant="outlined" />
           <TextField label="Description" name="description" value={selectedConcert?.description || ""} onChange={handleChange} fullWidth margin="dense" variant="outlined" multiline rows={4} />
-          <Rating name="rating" value={selectedConcert?.rating || 0} onChange={(e, newValue) => handleRatingChange(newValue)} />
+          <Rating name="rating" value={selectedConcert?.rating || 0} onChange={handleRatingChange} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseEditModal} color="secondary">Cancel</Button>
