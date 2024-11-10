@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import "../src/index.css";
 import Card from "@material-ui/core/Card";
@@ -43,10 +43,52 @@ export default function Home() {
 
     fetchConcerts();
   }, []);
-  const handleChange = () => {};
-  const handleRatingChange = () => {};
-  const handleUpdateConcert = () => {};
+  // Function to open the modal and load selected concert data
+  const handleEditClick = (concert) => {
+    setSelectedConcert(concert); // Set selected concert for editing
+    setOpenModal(true); // Open modal
+  };
+  // Function to handle updating concert details
+  const handleUpdateConcert = async () => {
+    const token = sessionStorage.getItem("jwt")
+      ? JSON.parse(sessionStorage.getItem("jwt")).token
+      : null;
 
+    if (!token) {
+      console.log("User is not authenticated. Redirecting to login...");
+      // Handle the case where the user is not authenticated
+      return;
+    }
+
+    try {
+      const response = await axios.put(
+        `http://localhost:3000/api/concerts/${selectedConcert._id}`,
+        selectedConcert,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
+      console.log("Update response:", response);
+      setConcerts(
+        concerts.map((c) =>
+          c._id === selectedConcert._id ? selectedConcert : c
+        )
+      );
+      setOpenModal(false); // Close modal
+    } catch (error) {
+      console.error("Error updating concert:", error);
+    }
+  };
+  // Function to handle changes in the modal form fields
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setSelectedConcert((prevConcert) => ({ ...prevConcert, [name]: value }));
+    console.log("Updated selectedConcert:", selectedConcert); // Debugging statement
+  };
+  const handleRatingChange = () => {};
   return (
     <div>
       <Card className="card">
@@ -99,7 +141,7 @@ export default function Home() {
             <div className="button-container">
               <button
                 className="edit-button"
-                onClick={() => console.log(`Edit concert ${concert._id}`)}
+                onClick={() => handleEditClick(concert)}
               >
                 Edit
               </button>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Card, Typography, TextField, Button } from "@material-ui/core";
 import { Rating } from "@mui/material";
 import { toast } from "react-toastify";

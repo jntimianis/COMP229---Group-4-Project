@@ -16,14 +16,7 @@ function MainRouter() {
       <Menu />
 
       <Routes>
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/" element={<PrivateRoute>{<Home />}</PrivateRoute>} />
         <Route
           path="/addconcerts"
           element={
@@ -32,6 +25,8 @@ function MainRouter() {
             </PrivateRoute>
           }
         />
+        <Route path="/add-concerts" element={<AddConcerts />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
         <Route
