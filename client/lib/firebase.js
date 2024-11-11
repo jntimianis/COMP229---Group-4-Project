@@ -2,17 +2,17 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB6edRgETjyS_QMRh1u7hToxZY_OQ7yTGI",
+  apiKey: "",
 
-  authDomain: "concertapp-b034c.firebaseapp.com",
+  authDomain: "",
 
-  projectId: "concertapp-b034c",
+  projectId: "",
 
-  storageBucket: "concertapp-b034c.firebasestorage.app",
+  storageBucket: "",
 
-  messagingSenderId: "170678849244",
+  messagingSenderId: "",
 
-  appId: "1:170678849244:web:d02bbf59b40f7e98b3ee19",
+  appId: "",
 };
 
 const app = initializeApp(firebaseConfig);
