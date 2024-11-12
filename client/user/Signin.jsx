@@ -7,10 +7,10 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import Icon from '@material-ui/core/Icon'
 import { makeStyles } from '@material-ui/core/styles'
-import auth from './auth-helper.js'
+import auth from '../lib/auth-helper.js'
 import {Navigate} from 'react-router-dom'
 import { useLocation } from 'react-router-dom';
-import {signin} from './api-auth.js'
+import {signin} from '../lib/api-auth.js'
 
 const useStyles = makeStyles(theme => ({
   card: {

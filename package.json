@@ -24,7 +24,9 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@material-ui/styles": "^4.11.5",
     "@mui/material": "^6.1.6",
+    "@mui/styles": "^6.1.6",
     "axios": "^1.7.7",
     "body-parser": "^1.20.2",
     "compression": "^1.7.4",
