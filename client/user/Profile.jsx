@@ -22,15 +22,28 @@ import { read } from "./api-user.js";
 import { useLocation, Navigate, Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
-  root: theme.mixins.gutters({
-    maxWidth: 600,
+  root: {
     margin: "auto",
-    padding: theme.spacing(3),
+    padding: "auto",
+    textAlign: "center",
     marginTop: theme.spacing(5),
-  }),
+    paddingBottom: theme.spacing(2),
+  },
+  error: {
+    verticalAlign: "middle",
+  },
   title: {
-    marginTop: theme.spacing(3),
-    color: theme.palette.protectedTitle,
+    marginTop: theme.spacing(2),
+    color: theme.palette.openTitle,
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 300,
+  },
+  submit: {
+    margin: "auto",
+    marginBottom: theme.spacing(2),
   },
 }));
 export default function Profile({ match }) {
@@ -71,7 +84,7 @@ export default function Profile({ match }) {
     console.log(user._id);
   }
   return (
-    <Paper className={classes.root} elevation={4}>
+    <Paper sx={{ maxWidth: 1 / 4 }} className={classes.root} elevation={4}>
       <Typography variant="h6" className={classes.title}>
         Profile
       </Typography>
