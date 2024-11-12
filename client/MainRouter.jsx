@@ -4,7 +4,7 @@ import Home from "./core/Home";
 import AddConcerts from "./core/AddConcerts.jsx";
 import Users from "./user/Users.jsx";
 import Signup from "./user/Signup.jsx";
-import Signin from "./lib/Signin.jsx";
+import Signin from "./user/Signin.jsx";
 import Profile from "./user/Profile.jsx";
 import PrivateRoute from "./lib/PrivateRoute.jsx";
 import EditProfile from "./user/EditProfile.jsx";
