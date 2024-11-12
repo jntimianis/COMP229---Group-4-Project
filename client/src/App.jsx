@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "@material-ui/styles";
+import { BrowserRouter as Router } from "react-router-dom";
+import { ThemeProvider } from "@mui/material";
 import MainRouter from "../MainRouter";
 import theme from "../theme";
 import { ToastContainer } from "react-toastify";

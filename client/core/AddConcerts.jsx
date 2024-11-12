@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Card, Typography, TextField, Button } from "@material-ui/core";
-import { Rating } from "@mui/material";
+import { Card, Typography, Button, TextField, Rating } from "@mui/material";
 import { toast } from "react-toastify";
 export default function AddConcerts() {
   const [concertData, setConcertData] = useState({
@@ -38,7 +37,7 @@ export default function AddConcerts() {
           venue: "",
           location: "",
           description: "",
-          rating: 0
+          rating: 0,
         });
       } else {
         toast.error("Failed to add concert");

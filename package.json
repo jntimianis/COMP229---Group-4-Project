@@ -22,12 +22,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
-    "@material-ui/styles": "^4.11.5",
-    "@mui/material": "^6.1.6",
-    "@mui/styles": "^6.1.6",
-    "axios": "^1.7.7",
     "body-parser": "^1.20.2",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
@@ -41,7 +35,6 @@
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "method-override": "^3.0.0",
-    "mongoose": "^8.1.1",
-    "react-toastify": "^10.0.6"
+    "mongoose": "^8.1.1"
   }
 }
