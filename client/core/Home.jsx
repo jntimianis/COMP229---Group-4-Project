@@ -32,7 +32,7 @@ export default function Home() {
     console.log("JWT Get Token:", token); // Log the token for debugging
     const fetchConcerts = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/concerts", {
+        const response = await axios.get("/api/concerts", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
           },
@@ -66,7 +66,7 @@ export default function Home() {
 
     try {
       const response = await axios.put(
-        `http://localhost:3000/api/concerts/${selectedConcert._id}`,
+        `/api/concerts/${selectedConcert._id}`,
         selectedConcert,
         {
           headers: {
@@ -112,15 +112,12 @@ export default function Home() {
         return;
       }
 
-      await axios.delete(
-        `http://localhost:3000/api/concerts/${selectedConcert._id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          withCredentials: true,
-        }
-      );
+      await axios.delete(`/api/concerts/${selectedConcert._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
 
       // Remove the deleted concert from the local state
       setConcerts(concerts.filter((c) => c._id !== selectedConcert._id));
