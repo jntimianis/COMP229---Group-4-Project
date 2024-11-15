@@ -17,7 +17,9 @@ const create = async (req, res) => {
 
 const list = async (req, res) => {
   try {
-    let concerts = await Concert.find().select("name date venue location description rating");
+    let concerts = await Concert.find().select(
+      "name date venue location description rating pic"
+    );
     res.json(concerts);
   } catch (err) {
     return res.status(400).json({
@@ -85,4 +87,12 @@ const updateRating = async (req, res) => {
   }
 };
 
-export default { create, concertByID, read, list, remove, update , updateRating };
+export default {
+  create,
+  concertByID,
+  read,
+  list,
+  remove,
+  update,
+  updateRating,
+};

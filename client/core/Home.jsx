@@ -14,8 +14,10 @@ import {
   Rating,
 } from "@mui/material";
 import ConfirmationModal from "./ConfirmationModal.jsx";
-
+import { storage } from "../lib/firebase";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Home() {
   const [concerts, setConcerts] = useState([]);
@@ -23,7 +25,10 @@ export default function Home() {
   const [openEditModal, setOpenEditModal] = useState(false); // For controlling edit modal visibility
   const [openDeleteModal, setOpenDeleteModal] = useState(false); // For controlling delete modal visibility
   const navigate = useNavigate();
+  const [imageUpload, setImageUpload] = useState(null);
+  const [tempImageUpload, setTempImageUpload] = useState(null);
 
+  const [downloadURL, setDownloadURL] = useState(null);
   // Fetch concerts from the backend
   useEffect(() => {
     const token = sessionStorage.getItem("jwt")
@@ -64,10 +69,34 @@ export default function Home() {
       return;
     }
 
+    let imageUrl = null; // Temporary variable for the image URL
+
+    if (imageUpload) {
+      const storageRef = ref(storage, `uploads/${imageUpload.name}`);
+      try {
+        // Upload the image
+        await uploadBytes(storageRef, imageUpload);
+
+        // Get the download URL
+        imageUrl = await getDownloadURL(storageRef);
+        toast.success("Image Uploaded");
+      } catch (error) {
+        console.error("Error uploading file:", error);
+        return; // Stop execution if upload fails
+      }
+    }
+
     try {
+      // Ensure imageUrl is used if available
+      const completeConcertData = {
+        ...selectedConcert,
+        pic: imageUrl || selectedConcert.pic, // Use the existing pic if no new image is uploaded
+      };
+
+      // Make the API request
       const response = await axios.put(
-        `/api/concerts/${selectedConcert._id}`,
-        selectedConcert,
+        `/api/concerts/${completeConcertData._id}`,
+        completeConcertData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -75,12 +104,17 @@ export default function Home() {
           withCredentials: true,
         }
       );
+
       console.log("Update response:", response);
+
+      // Update the state
       setConcerts(
         concerts.map((c) =>
-          c._id === selectedConcert._id ? selectedConcert : c
+          c._id === selectedConcert._id ? completeConcertData : c
         )
       );
+      setTempImageUpload(null);
+
       setOpenEditModal(false); // Close edit modal
     } catch (error) {
       console.error("Error updating concert:", error);
@@ -141,6 +175,17 @@ export default function Home() {
     setSelectedConcert((prevConcert) => ({ ...prevConcert, rating: newValue }));
   };
 
+  const handleFileChange = (e) => {
+    setImageUpload(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setTempImageUpload(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   return (
     <div>
       <Card className="card">
@@ -157,7 +202,7 @@ export default function Home() {
         {concerts.map((concert) => (
           <Card key={concert._id} className="card">
             <img
-              src={concert.imageUrl || "path/to/placeholder.jpg"}
+              src={concert.pic || "path/to/placeholder.jpg"}
               alt={concert.name}
             />
             <CardContent>
@@ -226,6 +271,22 @@ export default function Home() {
             margin="dense"
             variant="outlined"
           />
+          {tempImageUpload ? (
+            <img
+              src={tempImageUpload}
+              alt="Temporary Upload"
+              style={{ width: "300px", height: "300px", objectFit: "cover" }}
+            />
+          ) : selectedConcert?.pic ? (
+            <img
+              src={selectedConcert.pic}
+              alt="Concert"
+              style={{ width: "300px", height: "300px", objectFit: "cover" }}
+            />
+          ) : (
+            <p>No image available</p>
+          )}
+          <input type="file" onChange={handleFileChange} />
           <TextField
             label="Date"
             name="date"
