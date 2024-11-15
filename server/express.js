@@ -12,18 +12,20 @@ import path from "path";
 const app = express();
 const CURRENT_WORKING_DIR = process.cwd();
 
-app.use(cors({
-  origin: 'http://localhost:5173', // Allow requests from your frontend URL
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-  optionsSuccessStatus: 200 // For legacy browsers (handling preflight requests)
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Allow requests from your frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+    optionsSuccessStatus: 200, // For legacy browsers (handling preflight requests)
+  })
+);
 
 // Optional: Explicitly handle OPTIONS requests for all routes
-app.options('*', cors());
+app.options("*", cors());
 
-app.use("/dist", express.static(path.join(CURRENT_WORKING_DIR, "dist")));
+app.use(express.static(path.join(CURRENT_WORKING_DIR, "dist/app")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/", userRoutes);
