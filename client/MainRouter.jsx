@@ -6,12 +6,17 @@ import Signin from "./user/Signin.jsx";
 import Profile from "./user/Profile.jsx";
 import PrivateRoute from "./lib/PrivateRoute.jsx";
 import EditProfile from "./user/EditProfile.jsx";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 import Menu from "./core/Menu";
 function MainRouter() {
   return (
     <div>
       <Menu />
+
+      <ToastContainer />
 
       <Routes>
         <Route path="/" element={<PrivateRoute>{<Home />}</PrivateRoute>} />

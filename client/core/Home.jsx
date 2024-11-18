@@ -113,10 +113,12 @@ export default function Home() {
           c._id === selectedConcert._id ? completeConcertData : c
         )
       );
+      toast.success("Concert updated successfully!");
       setTempImageUpload(null);
 
       setOpenEditModal(false); // Close edit modal
     } catch (error) {
+      toast.error("Error updating concert.");
       console.error("Error updating concert:", error);
     }
   };
@@ -155,9 +157,11 @@ export default function Home() {
 
       // Remove the deleted concert from the local state
       setConcerts(concerts.filter((c) => c._id !== selectedConcert._id));
+      toast.success("Concert deleted successfully!");
       setOpenDeleteModal(false); // Close the delete modal
       setSelectedConcert(null); // Reset selected concert
     } catch (error) {
+      toast.error("Error deleting concert.");
       console.error("Error deleting concert:", error);
     }
   };
