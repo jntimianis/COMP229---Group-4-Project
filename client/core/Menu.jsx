@@ -20,6 +20,9 @@ export default function Menu() {
         <Link to="/">
           <Button style={isActive(location, "/")}>Home</Button>
         </Link>
+        <Link to="/about-us">
+          <Button style={isActive(location, "/about-us")}>About Us</Button>
+        </Link>
         <Link to="/addconcerts">
           <Button style={isActive(location, "/addconcerts")}>
             Add Concerts

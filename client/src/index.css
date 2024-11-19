@@ -96,6 +96,19 @@ button:focus-visible {
   text-align: center;
 }
 
+.aboutus-img {
+  float:left;
+  padding-right: 50px;
+  border-radius: 10px;
+}
+
+.aboutus-text {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
 .bold {
   font-weight: bold;
 }

@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./core/Home";
+import AboutUs from "./core/AboutUs.jsx";
 import AddConcerts from "./core/AddConcerts.jsx";
 import Signup from "./user/Signup.jsx";
 import Signin from "./user/Signin.jsx";
@@ -20,6 +21,7 @@ function MainRouter() {
 
       <Routes>
         <Route path="/" element={<PrivateRoute>{<Home />}</PrivateRoute>} />
+        <Route path="/about-us" element={<AboutUs />}/>
         <Route
           path="/addconcerts"
           element={
