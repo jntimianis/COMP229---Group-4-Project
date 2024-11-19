@@ -36,6 +36,30 @@ export default function Home() {
       : null;
     console.log("JWT Get Token:", token); // Log the token for debugging
     const fetchConcerts = async () => {
+      const decodeJWT = (token) => {
+        try {
+          const base64Url = token.split(".")[1];
+          const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+          const jsonPayload = decodeURIComponent(
+            atob(base64)
+              .split("")
+              .map((c) => `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`)
+              .join("")
+          );
+          return JSON.parse(jsonPayload);
+        } catch (error) {
+          console.error("Error decoding token:", error);
+          return null;
+        }
+      };
+
+      const decodedToken = decodeJWT(token);
+      if (!decodedToken || !decodedToken._id) {
+        toast.error("Invalid user authentication.");
+        return;
+      }
+      const userId = decodedToken._id;
+
       try {
         const response = await axios.get("/api/concerts", {
           headers: {
@@ -43,7 +67,14 @@ export default function Home() {
           },
           withCredentials: true,
         });
-        setConcerts(response.data);
+        const allConcerts = response.data;
+
+        // Filter concerts created by the logged-in user
+        const userConcerts = allConcerts.filter(
+          (concert) => concert.createdBy === userId
+        );
+
+        setConcerts(userConcerts);
       } catch (error) {
         console.error("Error fetching concerts:", error);
       }

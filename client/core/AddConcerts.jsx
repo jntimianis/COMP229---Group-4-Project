@@ -4,6 +4,7 @@ import { storage } from "../lib/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
 export default function AddConcerts() {
   const [concertData, setConcertData] = useState({
     name: "",
@@ -31,6 +32,49 @@ export default function AddConcerts() {
     e.preventDefault();
     let imageUrl = null; // Temporary variable for the image URL
 
+    const decodeJWT = (token) => {
+      try {
+        // Split the token into its three parts
+        const base64Url = token.split(".")[1];
+        if (!base64Url) {
+          throw new Error("Invalid token format");
+        }
+    
+        // Decode Base64Url (replace `-` and `_` to standard Base64 characters)
+        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        const jsonPayload = decodeURIComponent(
+          atob(base64)
+            .split("")
+            .map((c) => `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`)
+            .join("")
+        );
+    
+        // Parse the JSON payload and return it
+        return JSON.parse(jsonPayload);
+      } catch (error) {
+        console.error("Error decoding token:", error.message);
+        return null; // Return null if decoding fails
+      }
+    };
+
+    const token = sessionStorage.getItem("jwt")
+    ? JSON.parse(sessionStorage.getItem("jwt")).token
+    : null;
+
+  if (!token) {
+    toast.error("You must be logged in to add a concert");
+    return;
+  }
+
+  // Decode the token to extract user information
+  let userId;
+  try {
+    const decoded = decodeJWT(token);
+    userId = decoded._id; // Replace with the correct field in your token, e.g., decoded.email
+  } catch (err) {
+    toast.error("Invalid token");
+    return;
+  }
     if (imageUpload) {
       const storageRef = ref(storage, `uploads/${imageUpload.name}`);
       try {
@@ -46,10 +90,10 @@ export default function AddConcerts() {
       }
     }
     try {
-      const completeConcertData = { ...concertData, pic: imageUrl };
+      const completeConcertData = { ...concertData, pic: imageUrl, createdBy: userId };
       const response = await fetch("/api/concerts", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json"},
         body: JSON.stringify(completeConcertData),
       });
       if (response.ok) {
