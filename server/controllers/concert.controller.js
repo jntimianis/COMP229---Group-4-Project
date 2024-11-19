@@ -18,7 +18,7 @@ const create = async (req, res) => {
 const list = async (req, res) => {
   try {
     let concerts = await Concert.find().select(
-      "name date venue location description rating pic"
+      "name date venue location description rating pic createdBy"
     );
     res.json(concerts);
   } catch (err) {
