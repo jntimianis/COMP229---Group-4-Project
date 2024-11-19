@@ -1,6 +1,7 @@
 import { AppBar, Button, Toolbar, Typography } from "@mui/material";
 import auth from "../lib/auth-helper";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import "../src/index.css";
 
 const isActive = (location, path) => {
   return location.pathname === path
@@ -13,7 +14,11 @@ export default function Menu() {
 
   return (
     <AppBar position="static">
+      <div class="logo" >
+      <img src="/assets/images/team-logo.jpg"></img>
       <Toolbar>
+    
+
         <Typography variant="h6" color="inherit">
           Concert Compass
         </Typography>
@@ -61,6 +66,9 @@ export default function Menu() {
           </span>
         )}
       </Toolbar>
+
+
+      </div>
     </AppBar>
   );
 }

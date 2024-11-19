@@ -148,6 +148,23 @@ button:focus-visible {
   font-size: 0.9em;
   transition: background-color 0.3s ease;
 }
+div img {
+  height: 70px;
+  width: 70px;
+ 
+  top:0px;
+  left: 0px;
+  float: left;
+  margin-right: 1px;
+}
+.logo {
+  padding-right: 0px;
+  top:0px;
+  left:0px;
+  float: left;
+  
+
+}
 
 .delete-button:hover {
   background-color: #d32f2f; /* Darker red on hover */
