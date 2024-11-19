@@ -12,6 +12,7 @@ import {
   DialogActions,
   DialogContent,
   Rating,
+  Box,
 } from "@mui/material";
 import ConfirmationModal from "./ConfirmationModal.jsx";
 import { storage } from "../lib/firebase";
@@ -27,6 +28,7 @@ export default function Home() {
   const navigate = useNavigate();
   const [imageUpload, setImageUpload] = useState(null);
   const [tempImageUpload, setTempImageUpload] = useState(null);
+  const [sortOption, setSortOption] = useState("default"); // default, name, date, rating
 
   const [downloadURL, setDownloadURL] = useState(null);
   // Fetch concerts from the backend
@@ -83,6 +85,17 @@ export default function Home() {
     fetchConcerts();
   }, []);
 
+  const sortedConcerts = [...concerts].sort((a, b) => {
+    if (sortOption === "name") {
+      return a.name.localeCompare(b.name); // Alphabetical order
+    } else if (sortOption === "date") {
+      return new Date(a.date) - new Date(b.date); // Oldest to newest
+    } else if (sortOption === "rating") {
+      return b.rating - a.rating; // Highest rating first
+    } else {
+      return 0; // Default order
+    }
+  });
   // Function to open the edit modal and load selected concert data
   const handleEditClick = (concert) => {
     setSelectedConcert(concert); // Set selected concert for editing
@@ -228,13 +241,33 @@ export default function Home() {
           Track your concerts and all the good memories that come with!
         </Typography>
       </Card>
-
+      <Box  sx={{display: "flex",justifyContent: "center", alignItems: "center", width: "100%",padding: "20px",  }}></Box>
+      <TextField
+          select
+          label="Sort By"
+          value={sortOption}
+          onChange={(e) => setSortOption(e.target.value)}
+          SelectProps={{ native: true }}
+          variant="outlined"
+          sx={{ minWidth: "200px", boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "8px",
+              "&:hover fieldset": {
+                borderColor: "#3f51b5",
+              },
+            },
+          }}
+        >
+          <option value="default">Default</option>
+          <option value="name">Name</option>
+          <option value="date">Date</option>
+          <option value="rating">Rating</option>
+        </TextField>
       <div className="container">
         <button className="add-button" onClick={() => navigate("/addconcerts")}>
           + Add New Concert
-        </button>
-
-        {concerts.map((concert) => (
+        </button>          
+        {sortedConcerts.map((concert) => (
           <Card key={concert._id} className="card">
             <img
               src={concert.pic || "path/to/placeholder.jpg"}
