@@ -7,7 +7,7 @@ const config = {
     "mongodb+srv://jntimianis:yMJthXplIlRvbO7v@cluster0.0occm.mongodb.net/ConcertCompass?retryWrites=true&w=majority&appName=Cluster0" ||
     process.env.MONGO_HOST ||
     "mongodb://" +
-      (process.env.IP || "localhost") +
+      (process.env.IP || "0.0.0.0") +
       ":" +
       (process.env.MONGO_PORT || "27017") +
       "/mernproject",

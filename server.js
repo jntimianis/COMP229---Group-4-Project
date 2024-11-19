@@ -7,7 +7,7 @@ import cors from "cors";
 // CORS configuration
 
 const corsOptions = {
-  origin: "http://localhost:5173", // Allow your frontend's URL
+  origin: "http://0.0.0.0:5173", // Allow your frontend's URL
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Include OPTIONS for preflight requests
   allowedHeaders: ["Content-Type", "Authorization"], // Include headers you use
   credentials: true, // Allow credentials (cookies, authorization headers)
