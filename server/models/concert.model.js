@@ -9,6 +9,11 @@ const ConcertSchema = new mongoose.Schema(
     description: { type: String, required: true },
     rating: { type: Number, required: true },
     pic: { type: String, required: true },
+    createdBy: {
+      type: Date,
+      default: Date.now,
+    },
+
   },
   { timestamps: true }
 );
