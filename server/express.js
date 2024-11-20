@@ -37,6 +37,12 @@ app.use(cookieParser());
 app.use(compress());
 app.use(helmet());
 app.use(cors());
+
+// Catch-all route for React
+app.get("*", (req, res) => {
+  res.sendFile(path.join(CURRENT_WORKING_DIR, "dist/app", "index.html"));
+});
+
 app.use((err, req, res, next) => {
   if (err.name === "UnauthorizedError") {
     res.status(401).json({ error: err.name + ": " + err.message });
