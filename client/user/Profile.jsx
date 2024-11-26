@@ -28,13 +28,17 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     marginTop: theme.spacing(5),
     paddingBottom: theme.spacing(2),
+    background: "#AEC3B0",
   },
   error: {
     verticalAlign: "middle",
   },
   title: {
     marginTop: theme.spacing(2),
-    color: theme.palette.openTitle,
+    color: "#124559"
+  },
+  text: {
+    color: "#598392",
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -95,7 +99,7 @@ export default function Profile({ match }) {
               <PersonIcon />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary={user.name} secondary={user.email} />{" "}
+          <ListItemText className={classes.text} primary={user.name} secondary={user.email} />{" "}
           {auth.isAuthenticated().user &&
             auth.isAuthenticated().user._id == user._id && (
               <ListItemSecondaryAction>
@@ -111,7 +115,7 @@ export default function Profile({ match }) {
         <Divider />
         <ListItem>
           <ListItemText
-            primary={"Joined: " + new Date(user.created).toDateString()}
+            className={classes.text} primary={"Joined: " + new Date(user.created).toDateString()}
           />
         </ListItem>
       </List>

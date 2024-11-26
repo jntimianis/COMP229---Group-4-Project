@@ -18,16 +18,20 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const useStyles = makeStyles((theme) => ({
+  body: {
+    background: "#01161E",
+  },
   card: {
     maxWidth: 600,
     margin: "auto",
     textAlign: "center",
     marginTop: theme.spacing(5),
     paddingBottom: theme.spacing(2),
+    background: "#AEC3B0",
   },
   title: {
     margin: theme.spacing(2),
-    color: theme.palette.protectedTitle,
+    color: "#124559",
   },
   error: {
     verticalAlign: "middle",
@@ -36,10 +40,13 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: 300,
+    background: "white",
   },
   submit: {
     margin: "auto",
     marginBottom: theme.spacing(2),
+    color: "#598392",
+    background: "#EFF6E0",
   },
 }));
 export default function EditProfile() {
