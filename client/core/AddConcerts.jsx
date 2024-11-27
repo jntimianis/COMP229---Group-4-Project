@@ -4,11 +4,15 @@ import { storage } from "../lib/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import "../src/AddConcert.css";
 
 export default function AddConcerts() {
   const [concertData, setConcertData] = useState({
     name: "",
-    date: "",
+    date: null,
     venue: "",
     location: "",
     description: "",
@@ -17,13 +21,16 @@ export default function AddConcerts() {
   });
   const [imageUpload, setImageUpload] = useState(null);
   const [downloadURL, setDownloadURL] = useState(null);
+  const [concertDate, setConcertDate] = useState(null)
   const [tempImageUpload, setTempImageUpload] = useState(null);
   const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setConcertData({ ...concertData, [name]: value });
   };
-
+  const handleDateChange = (newDate) => {
+    setConcertData({ ...concertData, date: newDate });
+  };
   const handleRatingChange = (event, newValue) => {
     setConcertData({ ...concertData, rating: newValue });
   };
@@ -141,17 +148,36 @@ export default function AddConcerts() {
     }
   };
   return (
-    <Card style={{ padding: "20px", margin: "20px" }}>
-      <Typography variant="h6">Add a New Concert</Typography>
-      {tempImageUpload && (
-        <img
-          src={tempImageUpload}
-          alt="Temporary Upload"
-          style={{ width: "300px", height: "300px", objectFit: "cover" }}
+    <div className="add-concert-page">
+    <Card className="add-concert-card">
+      <Typography variant="h5" className="title">Add New Concert</Typography>
+      {tempImageUpload ? (
+  <div className="image-container">
+  <img
+    src={tempImageUpload}
+    alt="Temporary Upload"
+    className="uploaded-image"
+  />
+</div>
+) : (
+  <div className="placeholder-image">
+    <Typography variant="subtitle1" className="placeholder-text">
+      No Image Uploaded
+    </Typography>
+  </div>
+)}
+      <div className="file-input-container">
+        <label htmlFor="file-input" className="custom-file-input">
+          Upload Concert Photo
+        </label>
+        <input
+          type="file"
+          id="file-input"
+          onChange={handleFileChange}
+          style={{ display: "none" }}
         />
-      )}
-      <input type="file" onChange={handleFileChange} />
-      <form onSubmit={handleSubmit}>
+      </div>
+      <form onSubmit={handleSubmit} className="concert-form">
         <TextField
           label="Concert Name"
           name="name"
@@ -160,16 +186,14 @@ export default function AddConcerts() {
           fullWidth
           margin="normal"
         />
-        <TextField
-          label="Date"
-          name="date"
-          type="date"
-          value={concertData.date}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-          InputLabelProps={{ shrink: true }}
-        />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DatePicker
+        label="Concert Date"
+        value={concertData.date}
+        onChange={handleDateChange}
+        renderInput={(params) => <TextField {...params} fullWidth />}
+      />
+    </LocalizationProvider>
         <TextField
           label="Venue"
           name="venue"
@@ -201,10 +225,16 @@ export default function AddConcerts() {
           value={concertData.rating}
           onChange={handleRatingChange}
         />
-        <Button type="submit" color="primary" variant="contained">
-          Add Concert
+        <div></div>
+        <Button
+          type="submit"
+          variant="contained"
+          className="add-concert-button"
+        >
+            Add Concert
         </Button>
       </form>
     </Card>
+    </div>
   );
 }
