@@ -17,7 +17,7 @@ export default function Menu() {
     <AppBar position="static">
       <div class="logo">
         <img src={TeamLogo}></img>
-        <Toolbar>
+        <Toolbar className = "toolBarColor">
           <Typography variant="h6" color="inherit">
             Concert Compass
           </Typography>
