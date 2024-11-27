@@ -1,0 +1,153 @@
+.add-concert-page {
+    position: relative; /* Ensures the pseudo-element is positioned correctly */
+    min-height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevents overflow caused by pseudo-elements */
+  }
+  
+  .add-concert-page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("assets/musicalbackground.jpg") center center / cover no-repeat; /* Add your background image */
+    opacity: 0.032; /* Lighten the background */
+    z-index: -1; /* Keep it behind all content */
+    pointer-events: none; /* Ensure it doesn't interfere with interactions */
+  }
+  
+  .add-concert-card {
+    background-color: white; /* Keep the card opaque */
+    z-index: 1; /* Ensure it stays above the background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+  }
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4b6043;
+    font-family: "Roboto", sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .temp-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin: 10px auto;
+    display: block;
+    border: 2px solid #AEC3B0;
+    border-radius: 5px;
+  }
+  
+  .concert-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .file-input-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .custom-file-input {
+    padding: 10px 20px;
+    background-color: #124559;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .custom-file-input:hover {
+    background-color: #598392;
+    color:white;
+  }
+  
+  .rating-container {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .add-concert-button {
+    background-color: #124559 !important; /* Default button color */
+    color: white;
+    align-self: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-concert-button:hover {
+    background-color: #598392 !important;
+    color:white;
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .placeholder-image {
+    width: 300px;
+    height: 300px;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #aec3b0;
+    border-radius: 5px;
+    background-color: #EFF6E0;
+  }
+  
+  .placeholder-text {
+    color: #4b6043;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .image-container {
+    width: 100%;
+    max-width: 300px; /* Restrict the max width */
+    height: auto;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #124559; /* Optional border for aesthetics */
+    border-radius: 5px;
+    overflow: hidden; /* Ensures the image doesn't overflow the container */
+    background-color: #AEC3B0;
+  }
+  
+  .uploaded-image {
+    width: 100%; /* Image will take the full width of the container */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensures the image scales without distortion */
+    border-radius: 5px; /* Matches the container's rounded edges */
+  }
+
+  @media (max-width: 768px) {
+    .add-concert-card {
+      padding: 15px;
+      margin: 15px;
+    }
+  
+    .add-concert-button {
+      width: 100%;
+    }
+  
+    .temp-image {
+      width: 100%;
+      height: auto;
+    }
+  }
