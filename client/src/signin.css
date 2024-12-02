@@ -1,0 +1,38 @@
+/** @format */
+
+body {
+  background-image: url(../assets/images/bg.png);
+  background-size: cover;
+  background-position: center top;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.header-text {
+  text-align: center;
+  padding-top: 0%;
+  margin-bottom: -3%;
+}
+.header-paragraph {
+  margin-top: -1%;
+}
+.left {
+  width: 50%;
+  margin-left: 5%;
+  margin-top: 5%;
+  .image-border {
+    border-radius: 2%;
+    overflow: hidden;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.right {
+  width: 50%;
+  margin-left: -10%;
+}

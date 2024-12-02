@@ -1,3 +1,5 @@
+/** @format */
+
 import { AppBar, Button, Toolbar, Typography } from "@mui/material";
 import auth from "../lib/auth-helper";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -6,7 +8,10 @@ import "../src/index.css";
 
 const isActive = (location, path) => {
   return location.pathname === path
-    ? { color: "#ff4081" }
+    ? {
+        color: "#ff4081",
+        fontWeight: "bold",
+      }
     : { color: "#ffffff" };
 };
 export default function Menu() {
@@ -15,9 +20,11 @@ export default function Menu() {
 
   return (
     <AppBar position="static">
-      <div class="logo">
-        <img src={TeamLogo}></img>
-        <Toolbar className = "toolBarColor">
+      <div>
+        <div className="logo">
+          <img src={TeamLogo} height="64"></img>
+        </div>
+        <Toolbar className="toolBarColor">
           <Typography variant="h6" color="inherit">
             Concert Compass
           </Typography>

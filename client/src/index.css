@@ -1,3 +1,5 @@
+/** @format */
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -24,8 +26,8 @@ a:hover {
 
 body {
   margin: 0;
-  display: block;  /* Change from flex to block */
-  width: 100%;     /* Make sure the body spans the full width */
+  display: block; /* Change from flex to block */
+  width: 100%; /* Make sure the body spans the full width */
   min-height: 100vh;
 }
 
@@ -59,7 +61,7 @@ button:focus-visible {
   padding: 20px;
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 columns */
-  gap: 20px;  /* Space between cards */
+  gap: 20px; /* Space between cards */
 }
 
 .card {
@@ -97,7 +99,7 @@ button:focus-visible {
 }
 
 .aboutus-img {
-  float:left;
+  float: left;
   padding-right: 50px;
   border-radius: 10px;
 }
@@ -148,35 +150,21 @@ button:focus-visible {
   font-size: 0.9em;
   transition: background-color 0.3s ease;
 }
-div img {
-  height: 70px;
-  width: 70px;
- 
-  top:0px;
-  left: 0px;
-  float: left;
-  margin-right: 1px;
-}
+
 .logo {
   padding-right: 0px;
-  top:0px;
-  left:0px;
+  top: 0px;
+  left: 0px;
   float: left;
-  
-
 }
 
-.toolBarColor{
+.toolBarColor {
   background-color: #598392;
 }
-
-
 
 .delete-button:hover {
   background-color: #d32f2f; /* Darker red on hover */
 }
-
-
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -193,7 +181,10 @@ div img {
 
 @media (max-width: 768px) {
   .container {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns for screens less than 768px wide */
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* 2 columns for screens less than 768px wide */
   }
 }
 
