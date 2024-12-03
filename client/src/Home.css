@@ -1,0 +1,152 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #01161E; /* Deep Navy */
+    color: #EFF6E0; /* Pale Greenish White */
+}
+
+/* Header Card */
+.card {
+    background-color: #124559; /* Teal Blue */
+    color: #EFF6E0; /* Pale Greenish White */
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Sophisticated Title */
+.card .title {
+    font-size: 24px; /* Larger font size for prominence */
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+    background: linear-gradient(to right, #598392, #AEC3B0); /* Gradient text */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; /* Makes gradient visible */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Adds subtle depth */
+    letter-spacing: 1px; /* Slight spacing for elegance */
+    text-transform: uppercase; /* Uniform case for boldness */
+}
+
+/* Container */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Add Button */
+.add-button {
+    background: linear-gradient(135deg, #598392, #AEC3B0); /* Gradient */
+    color: #01161E; /* Deep Navy */
+    padding: 12px 25px;
+    margin: 20px auto;
+    display: block;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.add-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #124559, #598392); /* Hover gradient */
+}
+
+/* Sort By Dropdown - Align Right */
+select {
+    font-size: 16px;
+    padding: 10px;
+    margin: 20px 0;
+    border: 2px solid #124559; /* Teal Blue */
+    border-radius: 8px;
+    background: linear-gradient(135deg, #EFF6E0, #AEC3B0); /* Gradient */
+    color: #01161E; /* Deep Navy */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    appearance: none; /* Removes default browser styling */
+    width: 220px;
+    float: right; /* Aligns dropdown to the right */
+    margin-right: 20px; /* Adds spacing from the edge */
+}
+
+select:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #AEC3B0, #EFF6E0); /* Hover gradient */
+}
+
+select:focus {
+    outline: none;
+    border-color: #598392; /* Accent on focus */
+}
+
+/* Concert Card */
+.card {
+    background-color: #AEC3B0; /* Light Greenish Grey */
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card .bold {
+    font-weight: bold;
+}
+
+.card .button-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.edit-button,
+.delete-button {
+    background-color: #124559; /* Teal Blue */
+    color: #EFF6E0; /* Pale Greenish White */
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.edit-button:hover {
+    transform: scale(1.05);
+    background-color: #598392; /* Muted Blue-Green */
+}
+
+.delete-button {
+    background-color: #AEC3B0; /* Light Greenish Grey */
+    color: #01161E; /* Deep Navy */
+}
+
+.delete-button:hover {
+    transform: scale(1.05);
+    background-color: #EFF6E0; /* Pale Greenish White */
+    color: #124559; /* Teal Blue */
+}
