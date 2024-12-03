@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "../src/index.css";
+import "../src/home.css";
 import {
   Card,
   CardContent,
