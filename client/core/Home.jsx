@@ -1,7 +1,9 @@
+/** @format */
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "../src/index.css";
-import "../src/home.css";
+import "../src/Home.css";
 import {
   Card,
   CardContent,
@@ -242,32 +244,42 @@ export default function Home() {
           Track your concerts and all the good memories that come with!
         </Typography>
       </Card>
-      <Box  sx={{display: "flex",justifyContent: "center", alignItems: "center", width: "100%",padding: "20px",  }}></Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          padding: "20px",
+        }}
+      ></Box>
       <TextField
-          select
-          label="Sort By"
-          value={sortOption}
-          onChange={(e) => setSortOption(e.target.value)}
-          SelectProps={{ native: true }}
-          variant="outlined"
-          sx={{ minWidth: "200px", boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-            "& .MuiOutlinedInput-root": {
-              borderRadius: "8px",
-              "&:hover fieldset": {
-                borderColor: "#3f51b5",
-              },
+        select
+        label="Sort By"
+        value={sortOption}
+        onChange={(e) => setSortOption(e.target.value)}
+        SelectProps={{ native: true }}
+        variant="outlined"
+        sx={{
+          minWidth: "200px",
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+          "& .MuiOutlinedInput-root": {
+            borderRadius: "8px",
+            "&:hover fieldset": {
+              borderColor: "#3f51b5",
             },
-          }}
-        >
-          <option value="default">Default</option>
-          <option value="name">Name</option>
-          <option value="date">Date</option>
-          <option value="rating">Rating</option>
-        </TextField>
+          },
+        }}
+      >
+        <option value="default">Default</option>
+        <option value="name">Name</option>
+        <option value="date">Date</option>
+        <option value="rating">Rating</option>
+      </TextField>
       <div className="container">
         <button className="add-button" onClick={() => navigate("/addconcerts")}>
           + Add New Concert
-        </button>          
+        </button>
         {sortedConcerts.map((concert) => (
           <Card key={concert._id} className="card">
             <img
