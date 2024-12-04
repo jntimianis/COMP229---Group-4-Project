@@ -150,3 +150,127 @@ select:focus {
     background-color: #EFF6E0; /* Pale Greenish White */
     color: #124559; /* Teal Blue */
 }
+/* Dialog (Edit Concert) */
+.MuiDialog-paper {
+    background-color: #EFF6E0; /* Soft Background */
+    color: #01161E; /* Text Color */
+    padding: 20px;
+    border-radius: 12px; /* Rounded Corners */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Shadow */
+    max-width: 600px;
+    margin: auto;
+}
+
+/* Dialog Title */
+.MuiDialogTitle-root {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #124559; /* Teal Blue */
+    margin-bottom: 20px;
+}
+
+/* Dialog Content */
+.MuiDialogContent-root {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.MuiDialogContent-root input,
+.MuiDialogContent-root textarea,
+.MuiDialogContent-root select {
+    padding: 10px;
+    border: 2px solid #124559; /* Border Color */
+    border-radius: 8px; /* Rounded Corners */
+    font-size: 16px;
+    background-color: #EFF6E0; /* Input Background */
+    color: #01161E; /* Text Color */
+}
+
+.MuiDialogContent-root input:focus,
+.MuiDialogContent-root textarea:focus,
+.MuiDialogContent-root select:focus {
+    outline: none;
+    border-color: #598392; /* Muted Blue-Green */
+}
+
+/* Image Preview */
+.image-preview {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #124559; /* Add border for preview */
+}
+
+/* Dialog Actions */
+.MuiDialogActions-root {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.MuiDialogActions-root button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.MuiDialogActions-root .MuiButton-textSecondary {
+    background-color: #AEC3B0; /* Light Greenish Grey */
+    color: #01161E; /* Text Color */
+}
+
+.MuiDialogActions-root .MuiButton-textSecondary:hover {
+    background-color: #EFF6E0; /* Hover Background */
+    color: #124559; /* Hover Text Color */
+}
+
+.MuiDialogActions-root .MuiButton-containedPrimary {
+    background-color: #124559; /* Teal Blue */
+    color: #EFF6E0; /* Button Text */
+}
+
+.MuiDialogActions-root .MuiButton-containedPrimary:hover {
+    background-color: #598392; /* Muted Blue-Green */
+}
+/* Spacing for TextField Containers */
+.MuiDialogContent-root .MuiFormControl-root {
+    margin-bottom: 20px; /* Add spacing between each field */
+}
+
+/* Optional: Additional Styling for Labels */
+.MuiInputLabel-root {
+    margin-bottom: 5px; /* Add small space between label and input */
+    font-weight: bold;
+    color: #124559; /* Teal Blue */
+}
+/* Spacing for the entire TextField container */
+.MuiFormControl-root {
+    margin-bottom: 20px; /* Adds space between each input field */
+}
+
+/* Optional: Space between Label and Input */
+.MuiInputLabel-root {
+    transform: translate(0, -10px) scale(1); /* Adjust position if needed */
+    margin-bottom: 10px; /* Ensure space between label and field */
+}
+
+/* Ensure the input itself has proper padding */
+.MuiOutlinedInput-root {
+    padding-top: 5px; /* Space inside the text box */
+    padding-bottom: 5px;
+}
+
+/* For TextAreas (Multiline Fields) */
+.MuiOutlinedInput-root textarea {
+    padding: 10px; /* Proper padding inside the text area */
+}
