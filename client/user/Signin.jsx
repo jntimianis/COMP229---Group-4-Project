@@ -16,6 +16,7 @@ import auth from "../lib/auth-helper.js";
 import { Navigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { signin } from "../lib/api-auth.js";
+import Langingpage from "../assets/images/landingpage.png";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -96,11 +97,7 @@ export default function Signin(props) {
       </div>
       <div className="main">
         <div className="left">
-          <img
-            src="../assets/images/landingpage.png"
-            width="800"
-            className="image-border"
-          />
+          <img src={Langingpage} width="800" className="image-border" />
         </div>
         <div className="right">
           <Card className={classes.card}>
